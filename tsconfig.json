@@ -18,13 +18,14 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": ["ES2022", "dom"]
+    "lib": ["ES2022", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@core/*": ["app/core/*"]
+    }
   },
-  "paths": {
-    "@/*": ["./src/*"],
-    "@core/*": ["app/core/*"],
-    "@modules/*": ["app/ui/modules/*"]
-  },
+
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,

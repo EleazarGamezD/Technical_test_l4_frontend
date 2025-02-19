@@ -1,0 +1,50 @@
+<div class="container mt-4">
+  <h2>Task List</h2>
+  
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Search tasks...">
+    </div>
+    <div class="col-md-6">
+      <select class="form-control" [(ngModel)]="statusFilter" (ngModelChange)="onStatusFilterChange()">
+         <option *ngFor="let status of taskStatus" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of pagedTasks">
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>
+          <span class="badge" [ngClass]="{'bg-warning': task.status === 'Pending', 'bg-success': task.status === 'Completed'}">
+            {{ task.status }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav *ngIf="totalPages > 1">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="currentPage = currentPage - 1" href="javascript:void(0)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+          [class.active]="currentPage === i + 1">
+        <a class="page-link" (click)="currentPage = i + 1" href="javascript:void(0)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="currentPage = currentPage + 1" href="javascript:void(0)">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

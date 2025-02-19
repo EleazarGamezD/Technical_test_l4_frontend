@@ -1,0 +1,26 @@
+<p>task-form works!</p>
+<div class="container mt-4">
+  <h2>{{ editMode ? 'Edit Task' : 'Create Task' }}</h2>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" formControlName="title" required>
+      <div *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched" class="text-danger">
+        Title is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" formControlName="description" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status</label>
+      <select class="form-control" id="status" formControlName="status">
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">{{ editMode ? 'Update' : 'Create' }} Task</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Cancel</button>
+  </form>
+</div>

@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, from, lastValueFrom, map } from 'rxjs';
 import { RequestMethod } from '../../enums/httpRequest/requestMethods.enum';
-import { ApiResponse } from '../../interfaces/api/api-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -16,8 +15,8 @@ export class GlobalHttpService {
     method: string = RequestMethod.GET
   ): Promise<T> {
     return lastValueFrom(
-      from(this.makeHttpRequest<ApiResponse<T>>(route, payload, method)).pipe(
-        map((res: ApiResponse<T>) => res.data),
+      from(this.makeHttpRequest<T>(route, payload, method)).pipe(
+        map((res) => res),
         catchError((error: HttpErrorResponse) => {
           console.error('Error:', error);
           throw error;
