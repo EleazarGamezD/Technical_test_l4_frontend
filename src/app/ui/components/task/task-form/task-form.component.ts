@@ -68,7 +68,6 @@ export class TaskFormComponent implements OnInit {
       if (this.editMode) {
         this.taskService.update(taskId, task as ITaskUpdate);
       } else {
-        console.log(task);
         this.taskService.create(task as ITaskCreate);
       }
 
