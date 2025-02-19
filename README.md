@@ -13,7 +13,7 @@ This is the frontend application for the Tecnical Test L4. It is built with Angu
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/EleazarGamezD/Tecnical_test_l4_frontend.git
+   git clone https://github.com/EleazarGamezD/Technical_test_l4_frontend.git
    cd tecnical_test_l4_frontend
    ```
 
