@@ -2,14 +2,19 @@ import { Injectable } from '@angular/core';
 import { GlobalHttpService } from '../globalHttp/global-http.service';
 import { API_TASK_ROUTES } from '../../api-routes/task/task.routes';
 import { RequestMethod } from '../../enums/httpRequest/requestMethods.enum';
-import { ITask, ITaskPaginated } from '../../interfaces/task/task.interface';
+import {
+  ITask,
+  ITaskCreate,
+  ITaskPaginated,
+  ITaskUpdate,
+} from '../../interfaces/task/task.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService extends GlobalHttpService {
-  async create(payload: ITask): Promise<ITask> {
-    return await this.makeRequest<ITask, ITask>(
+  async create(payload: ITaskCreate): Promise<ITask> {
+    return await this.makeRequest<ITask, ITaskCreate>(
       API_TASK_ROUTES.CREATE_TASK,
       payload,
       RequestMethod.POST
@@ -32,16 +37,15 @@ export class TaskService extends GlobalHttpService {
     );
   }
 
-  async update(data: ITask): Promise<ITask> {
-    const { id } = data;
-    return await this.makeRequest<ITask, object>(
-      `${API_TASK_ROUTES.UPDATE_TASK}/${id}`,
+  async update(taskId: number, data: ITaskUpdate): Promise<ITask> {
+    return await this.makeRequest<ITask, ITaskUpdate>(
+      `${API_TASK_ROUTES.UPDATE_TASK}/${taskId}`,
       data,
-      RequestMethod.PUT
+      RequestMethod.PATCH
     );
   }
 
-  async delete(id: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     return await this.makeHttpRequest<void>(
       `${API_TASK_ROUTES.DELETE_TASK}/${id}`,
       {},
