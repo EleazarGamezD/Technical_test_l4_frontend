@@ -7,7 +7,7 @@ import {
 import { TaskService } from '@/app/core/services/task/task.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-form',
@@ -20,13 +20,6 @@ export class TaskFormComponent implements OnInit {
   editTaskId: number | null = null;
   taskStatus = Object.values(TaskStatus);
   minDate: string;
-  taskStatusColors = {
-    [TaskStatus.PENDING]: 'bg-warning',
-    [TaskStatus.IN_PROGRESS]: 'bg-primary',
-    [TaskStatus.ON_HOLD]: 'bg-secondary',
-    [TaskStatus.CANCELLED]: 'bg-danger',
-    [TaskStatus.COMPLETED]: 'bg-success',
-  };
 
   constructor(
     private fb: FormBuilder,
